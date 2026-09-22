@@ -94,6 +94,8 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 body {
@@ -124,23 +126,11 @@ body::after {
   background: rgba(237, 240, 237, .92);
 }
 
-/* Scrollbar Styling */
+/* Keep pages scrollable without showing browser scrollbars. */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-color);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: var(--radius-full);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--border-hover);
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 /* Selection */
