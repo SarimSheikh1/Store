@@ -9,13 +9,7 @@ import { formatPrice } from '@/lib/utils';
 export default function RationPackagesPreview() {
   const [selectedPackage, setSelectedPackage] = useState(null);
 
-  // Calculate savings
-  const totalSavings = PACKAGES.reduce((total, pkg) => {
-    const itemsValue = pkg.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    return total + (itemsValue - pkg.price);
-  }, 0);
-
-  const averageSavings = Math.round(totalSavings / PACKAGES.length);
+  const maxSavings = Math.max(...PACKAGES.map((pkg) => pkg.savings || 0));
 
   return (
     <section className="section packages-section">
@@ -26,7 +20,7 @@ export default function RationPackagesPreview() {
             <div className="section-badge-container">
               <Badge variant="success" className="section-badge">
                 <span>💰</span>
-                Save up to Rs. {formatPrice(averageSavings)}/month
+                Save up to Rs. {formatPrice(maxSavings)}/month
               </Badge>
             </div>
             
@@ -62,12 +56,12 @@ export default function RationPackagesPreview() {
               <div className="stat-label">Package Options</div>
             </div>
             <div className="stat">
-              <div className="stat-number">500+</div>
-              <div className="stat-label">Happy Families</div>
+              <div className="stat-number">1–6+</div>
+              <div className="stat-label">People per package</div>
             </div>
             <div className="stat">
-              <div className="stat-number">20%</div>
-              <div className="stat-label">Average Savings</div>
+              <div className="stat-number">{PACKAGES.reduce((total, pkg) => total + pkg.items.length, 0)}</div>
+              <div className="stat-label">Items to choose from</div>
             </div>
           </div>
         </div>
@@ -134,10 +128,7 @@ export default function RationPackagesPreview() {
                 Monthly Savings
               </div>
               {PACKAGES.map(pkg => {
-                const itemsValue = pkg.items.reduce((sum, item) => 
-                  sum + (item.price * item.quantity), 0
-                );
-                const savings = itemsValue - pkg.price;
+                const savings = pkg.savings || 0;
                 return (
                   <div key={pkg.id} className="comparison-cell savings-cell">
                     <Badge variant="success" size="sm">

@@ -45,8 +45,8 @@ export default function HeroSection() {
           
           {/* Subtitle */}
           <p className="hero-subtitle">
-            Fresh produce, daily essentials, and monthly ration packages delivered straight to your door.
-            <span className="hero-highlight"> Order now and get delivery within {BUSINESS_CONFIG.deliveryTime}!</span>
+            Fresh produce, pantry essentials, and monthly ration packages—carefully picked and delivered to your door.
+            <span className="hero-highlight"> Delivery in around {BUSINESS_CONFIG.deliveryTime}.</span>
           </p>
 
           {/* Value Propositions */}
@@ -84,16 +84,16 @@ export default function HeroSection() {
           {/* Additional Info */}
           <div className="hero-stats">
             <div className="hero-stat">
-              <div className="hero-stat-number">500+</div>
-              <div className="hero-stat-label">Products Available</div>
+              <div className="hero-stat-number">COD</div>
+              <div className="hero-stat-label">Pay at your door</div>
             </div>
             <div className="hero-stat">
-              <div className="hero-stat-number">2-4hrs</div>
-              <div className="hero-stat-label">Delivery Time</div>
+              <div className="hero-stat-number">₨2,000+</div>
+              <div className="hero-stat-label">Free delivery</div>
             </div>
             <div className="hero-stat">
-              <div className="hero-stat-number">24/7</div>
-              <div className="hero-stat-label">Customer Support</div>
+              <div className="hero-stat-number">{BUSINESS_CONFIG.delivery.radius}</div>
+              <div className="hero-stat-label">Delivery area</div>
             </div>
           </div>
         </div>
@@ -163,14 +163,14 @@ export default function HeroSection() {
           font-size: clamp(1.125rem, 2.5vw, 1.375rem);
           color: #d6ddd5;
           max-width: 650px;
-          margin: 0 auto 3rem;
+          margin: 0 0 3rem;
           line-height: 1.6;
           opacity: 0;
           animation: fadeInUp 0.8s ease-out 0.6s forwards;
         }
 
         .hero-highlight {
-          color: var(--primary);
+          color: #9de0d1;
           font-weight: 600;
         }
 
@@ -210,7 +210,7 @@ export default function HeroSection() {
         .hero-actions {
           display: flex;
           gap: 1rem;
-          justify-content: center;
+          justify-content: flex-start;
           margin-bottom: 4rem;
           opacity: 0;
           animation: fadeInUp 0.8s ease-out 1s forwards;
@@ -223,6 +223,18 @@ export default function HeroSection() {
           min-width: 180px;
         }
 
+        .hero-actions .btn-outline {
+          color: #f7f5ee;
+          border-color: rgba(247, 245, 238, .7);
+          background: rgba(255, 255, 255, .04);
+        }
+
+        .hero-actions .btn-outline:hover {
+          background: #f7f5ee;
+          border-color: #f7f5ee;
+          color: #163847;
+        }
+
         .hero-actions .btn span {
           font-size: 1.125rem;
         }
@@ -232,7 +244,7 @@ export default function HeroSection() {
           grid-template-columns: repeat(3, 1fr);
           gap: 2rem;
           max-width: 500px;
-          margin: 0 auto;
+          margin: 0;
           padding-top: 2rem;
           border-top: 1px solid rgba(247, 245, 238, 0.24);
           opacity: 0;

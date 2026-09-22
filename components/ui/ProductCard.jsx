@@ -67,20 +67,9 @@ export default function ProductCard({ product, variant = 'default', showQuickAct
 
   return (
     <div className={`product-card product-card--${variant} ${!inStock ? 'product-card--out-of-stock' : ''}`}>
-      {/* Product Image */}
-      <div className="product-card__image">
-        <Link href={`/products/${product.id}`} className="product-card__image-link">
-          <div className="product-card__image-placeholder">
-            <img
-              src={product.image?.startsWith('/') || product.image?.startsWith('http') ? product.image : '/images/local-grocery-products.png'}
-              alt={product.name}
-              className="product-card__photo"
-            />
-          </div>
-        </Link>
-        
-        {/* Badges */}
-        <div className="product-card__badges">
+      <div className="product-card__content">
+        <div className="product-card__meta-row">
+          <div className="product-card__badges">
           {discount > 0 && (
             <span className="product-card__badge badge-discount">
               -{discount}%
@@ -101,22 +90,17 @@ export default function ProductCard({ product, variant = 'default', showQuickAct
               Out of Stock
             </span>
           )}
+          </div>
+          {showQuickActions && (
+            <button 
+              className={`product-card__wishlist ${inWishlist ? 'product-card__wishlist--active' : ''}`}
+              onClick={handleWishlistToggle}
+              aria-label={inWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+            >
+              {inWishlist ? '❤️' : '🤍'}
+            </button>
+          )}
         </div>
-        
-        {/* Wishlist Button */}
-        {showQuickActions && (
-          <button 
-            className={`product-card__wishlist ${inWishlist ? 'product-card__wishlist--active' : ''}`}
-            onClick={handleWishlistToggle}
-            aria-label={inWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
-          >
-            {inWishlist ? '❤️' : '🤍'}
-          </button>
-        )}
-      </div>
-
-      {/* Product Info */}
-      <div className="product-card__content">
         {/* Category */}
         <Link href={`/categories/${product.category}`} className="product-card__category">
           {product.category.replace('-', ' ')}
@@ -254,20 +238,17 @@ export default function ProductCard({ product, variant = 'default', showQuickAct
           transition: transform var(--transition-base);
         }
 
-        .product-card__photo { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .product-card__image-placeholder { display: grid; place-items: center; background: linear-gradient(145deg, #f4faf5, #e2eee7); }
+        .product-card__symbol { position: relative; z-index: 1; font-size: clamp(4.5rem, 8vw, 6.5rem); filter: drop-shadow(0 .55rem .55rem rgba(27, 67, 49, .18)); transition: transform var(--transition-base); }
+        .product-card__image-category { position: absolute; left: 1rem; bottom: .85rem; color: #31594c; font-size: .65rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 
-        .product-card:hover .product-card__image-placeholder {
-          transform: scale(1.1);
-        }
+        .product-card:hover .product-card__symbol { transform: translateY(-.2rem) scale(1.06); }
 
         .product-card__badges {
-          position: absolute;
-          top: 0.75rem;
-          left: 0.75rem;
+          position: static;
           display: flex;
-          flex-direction: column;
+          flex-wrap: wrap;
           gap: 0.25rem;
-          z-index: 10;
         }
 
         .product-card__badge {
@@ -302,9 +283,8 @@ export default function ProductCard({ product, variant = 'default', showQuickAct
         }
 
         .product-card__wishlist {
-          position: absolute;
-          top: 0.75rem;
-          right: 0.75rem;
+          position: static;
+          flex: 0 0 auto;
           background: rgba(255, 255, 255, 0.9);
           backdrop-filter: blur(4px);
           border: none;
@@ -317,7 +297,6 @@ export default function ProductCard({ product, variant = 'default', showQuickAct
           font-size: 1.25rem;
           transition: all var(--transition-base);
           cursor: pointer;
-          z-index: 10;
         }
 
         .product-card__wishlist:hover {
@@ -330,10 +309,19 @@ export default function ProductCard({ product, variant = 'default', showQuickAct
         }
 
         .product-card__content {
-          padding: 1rem;
+          padding: 1.15rem;
           flex-grow: 1;
           display: flex;
           flex-direction: column;
+        }
+
+        .product-card__meta-row {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: .75rem;
+          min-height: 2.2rem;
+          margin-bottom: .7rem;
         }
 
         .product-card__category {

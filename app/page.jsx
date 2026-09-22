@@ -5,14 +5,17 @@ import CategoriesSection from '@/components/home/CategoriesSection';
 import FeaturedProducts from '@/components/home/FeaturedProducts';
 import WhyChooseUsSection from '@/components/home/WhyChooseUsSection';
 import RationPackagesPreview from '@/components/home/RationPackagesPreview';
-import TestimonialsSection from '@/components/home/TestimonialsSection';
+import HowItWorksSection from '@/components/home/HowItWorksSection';
 import CTASection from '@/components/home/CTASection';
+import StoreExperienceSection from '@/components/home/StoreExperienceSection';
 
 export default function Home() {
   return (
     <>
       {/* Hero Section */}
       <HeroSection />
+
+      <StoreExperienceSection />
       
       {/* Categories Section */}
       <CategoriesSection />
@@ -26,8 +29,7 @@ export default function Home() {
       {/* Ration Packages */}
       <RationPackagesPreview />
       
-      {/* Customer Testimonials */}
-      <TestimonialsSection />
+      <HowItWorksSection />
       
       {/* Call to Action */}
       <CTASection />
